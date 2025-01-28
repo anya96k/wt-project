@@ -1,0 +1,77 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+  }
+  
+  body {
+    font-family: 'Arial', sans-serif;
+    margin: 0;
+    height: 100vh;
+    text-align: center;
+    padding: 20px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    position: relative; 
+  }
+  
+  body::before {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: url('ph.jpg') no-repeat center center fixed;
+    background-size: cover;
+    filter: blur(8px); 
+    z-index: -1; 
+  }
+  
+  header {
+    margin-bottom: 20px;
+  }
+  
+  h1 {
+    font-size: 2.5rem;
+    color: #e60c72;
+  }
+  
+  p {
+    color: #837a83;
+  }
+  
+  .game-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr); 
+    grid-template-rows: repeat(2, auto);
+    gap: 20px;
+    max-width: 1000px;
+    margin: 0 auto;
+    width: 100%;
+  }
+  
+  
+  .game-card {
+    background-color: #f7eaea;
+    padding: 15px;
+    text-align: center;
+    border-radius: 15px;
+    box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1);
+    text-decoration: none;
+    color: #333;
+    transition: transform 0.2s, box-shadow 0.2s;
+  }
+  
+  .game-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0px 8px 15px rgba(0, 0, 0, 0.2);
+  }
+  
+  footer {
+    margin-top: 30px;
+    color: #888;
+  }
+  
