@@ -1,0 +1,133 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>GAMERS HUB</title>
+  <link rel="stylesheet" href="styles.css">
+<style>  {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+  }
+  
+  body {
+    font-family: 'Arial', sans-serif;
+    margin: 0;
+    height: 100vh;
+    text-align: center;
+    padding: 20px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    position: relative; 
+  }
+  
+  body::before {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: url('https://thumbs.dreamstime.com/b/dice-mid-air-above-casino-table-blurred-background-lights-other-gaming-tables-scene-captures-excitement-329049970.jpg') no-repeat center center fixed;
+    background-size: cover;
+    filter: blur(8px); 
+    z-index: -1; 
+  }
+  
+  header {
+    margin-bottom: 20px;
+  }
+  
+  h1 {
+    font-size: 2.5rem;
+    color: #e60c72;
+  }
+  
+  p {
+    color: #837a83;
+  }
+  
+  .game-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr); 
+    grid-template-rows: repeat(2, auto);
+    gap: 20px;
+    max-width: 1000px;
+    margin: 0 auto;
+    width: 100%;
+  }
+  
+  
+  .game-card {
+    background-color: #f7eaea;
+    padding: 15px;
+    text-align: center;
+    border-radius: 15px;
+    box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1);
+    text-decoration: none;
+    color: #333;
+    transition: transform 0.2s, box-shadow 0.2s;
+  }
+  
+  .game-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0px 8px 15px rgba(0, 0, 0, 0.2);
+  }
+  
+  footer {
+    margin-top: 30px;
+    color: #888;
+  }
+  </style>
+
+</head>
+<body>
+  <header>
+    <h1>🎮 Welcome to the Gamer's Paradise 🎲</h1>
+    <p>Enjoy classic and fun games !</p>
+  </header>
+
+  <main>
+    <div class="game-grid">
+      <a href="https://www.crazygames.com/game/gulper-io" class="game-card">
+        <h2>🐍 Snake Game</h2>
+        <p>Grow the snake while avoiding collisions!</p>
+      </a>
+
+      <a href="https://poki.com/en/g/tic-tac-toe-3" class="game-card">
+        <h2>❌⭕ Tic-Tac-Toe</h2>
+        <p>Classic 2-player grid-based game.</p>
+      </a>
+
+      <a href="https://www.chess.com/game/122655697628" class="game-card">
+        <h2>♟️ Chess</h2>
+        <p>Train your mind with strategy and tactics!</p>
+      </a>
+
+      <a href="https://ludoking.com/play/#google_vignette" class="game-card">
+        <h2>🎲 Ludo</h2>
+        <p>A classic board game for multiplayer fun!</p>
+      </a>
+
+      <a href="https://www.livechat.com/typing-speed-test/#/" class="game-card">
+        <h2>⌨️ Typing Speed Test</h2>
+        <p>Test how fast you can type under pressure!</p>
+      </a>
+
+      <a href="games/memory-match/memory-match.html" class="game-card">
+        <h2>🧠 Memory Match</h2>
+        <p>Find matching pairs of cards!</p>
+      </a>
+
+    
+    </div>
+  </main>
+
+  <footer>
+  </footer>
+
+</body>
+</html>
