@@ -1,0 +1,223 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Tic Tac Toe</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            background: linear-gradient(45deg, #0e0d0d, #4444430a);
+            margin: 0;
+            text-align: center;
+            flex-direction: column;
+        }
+
+        h1 {
+            font-size: 3rem;
+            margin-bottom: 30px;
+            color: #1ae2d8;
+            text-transform: uppercase;
+            letter-spacing: 3px;
+        }
+
+        #game-board {
+            display: grid;
+            grid-template-columns: repeat(3, 120px);
+            grid-template-rows: repeat(3, 120px);
+            gap: 10px;
+            margin-bottom: 30px;
+        }
+
+        button {
+            width: 120px;
+            height: 120px;
+            font-size: 48px;
+            background-color: #fff;
+            border: 2px solid #333;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: bold;
+            transition: background-color 0.3s, transform 0.2s ease;
+            border-radius: 12px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        }
+
+        button:focus {
+            outline: none;
+        }
+
+        button:hover {
+            background-color: #f0f0f0;
+            transform: scale(1.1);
+        }
+
+        #status {
+            font-size: 22px;
+            color: #fcf8f8;
+            margin-bottom: 20px;
+        }
+
+        #status.win {
+            color: #2ecc71;
+            font-weight: bold;
+            font-size: 24px;
+        }
+
+        #status.tie {
+            color: #e67e22;
+            font-weight: bold;
+            font-size: 24px;
+        }
+
+        .reset-btn {
+            background-color: #3498db;
+            color: white;
+            font-size: 18px;
+            padding: 10px 25px;
+            border: none;
+            border-radius: 30px;
+            cursor: pointer;
+            transition: background-color 0.3s, transform 0.3s;
+            margin-top: 20px;
+        }
+
+        .reset-btn:hover {
+            background-color: #2980b9;
+            transform: scale(1.05);
+        }
+
+        .game-container {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            background: #0a0a0a;
+            border-radius: 12px;
+            padding: 30px 40px;
+            box-shadow: 0 12px 24px rgba(0, 0, 0, 0.1);
+        }
+
+        .info-text {
+            margin-top: 20px;
+        }
+
+        /* Winning animation */
+        .win-animation {
+            animation: winAnimation 0.5s ease-out;
+        }
+
+        @keyframes winAnimation {
+            0% {
+                transform: scale(1);
+                opacity: 0;
+            }
+            50% {
+                transform: scale(1.2);
+                opacity: 1;
+            }
+            100% {
+                transform: scale(1);
+                opacity: 1;
+            }
+        }
+
+    </style>
+</head>
+<body>
+    <div class="game-container">
+        <h1>Tic Tac Toe</h1>
+        <div id="game-board">
+            <button id="cell-0"></button>
+            <button id="cell-1"></button>
+            <button id="cell-2"></button>
+            <button id="cell-3"></button>
+            <button id="cell-4"></button>
+            <button id="cell-5"></button>
+            <button id="cell-6"></button>
+            <button id="cell-7"></button>
+            <button id="cell-8"></button>
+        </div>
+        <p id="status">Player X's turn</p>
+        <button class="reset-btn" id="resetBtn">Restart Game</button>
+    </div>
+
+    <script>
+        const cells = document.querySelectorAll('#game-board button');
+        const statusDisplay = document.getElementById('status');
+        const resetButton = document.getElementById('resetBtn');
+        let currentPlayer = 'X';
+        let gameActive = true;
+        let board = ['', '', '', '', '', '', '', '', ''];
+
+        const winningCombinations = [
+            [0, 1, 2],
+            [3, 4, 5],
+            [6, 7, 8],
+            [0, 3, 6],
+            [1, 4, 7],
+            [2, 5, 8],
+            [0, 4, 8],
+            [2, 4, 6]
+        ];
+
+        function handleClick(index) {
+            if (gameActive && board[index] === '') {
+                board[index] = currentPlayer;
+                cells[index].textContent = currentPlayer;
+                cells[index].style.color = currentPlayer === 'X' ? '#ff6347' : '#1e90ff'; // Red for X, Blue for O
+
+                if (checkWinner()) {
+                    statusDisplay.textContent = `Player ${currentPlayer} wins! 🎉`;
+                    statusDisplay.classList.add('win');
+                    statusDisplay.classList.add('win-animation');
+                    gameActive = false;
+                } else if (board.every(cell => cell !== '')) {
+                    statusDisplay.textContent = "It's a tie! 🤝";
+                    statusDisplay.classList.add('tie');
+                    gameActive = false;
+                } else {
+                    currentPlayer = currentPlayer === 'X' ? 'O' : 'X';
+                    statusDisplay.textContent = `Player ${currentPlayer}'s turn`;
+                }
+            }
+        }
+
+        function checkWinner() {
+            return winningCombinations.some(combination => {
+                const [a, b, c] = combination;
+                return board[a] === currentPlayer && board[b] === currentPlayer && board[c] === currentPlayer;
+            });
+        }
+
+        function resetGame() {
+            board = ['', '', '', '', '', '', '', '', ''];
+            gameActive = true;
+            currentPlayer = 'X';
+            statusDisplay.textContent = `Player X's turn`;
+            statusDisplay.classList.remove('win', 'tie', 'win-animation');
+            cells.forEach(cell => {
+                cell.textContent = '';
+                cell.style.color = '#333';
+            });
+        }
+
+        cells.forEach((cell, index) => {
+            cell.addEventListener('click', () => handleClick(index));
+        });
+
+        resetButton.addEventListener('click', resetGame);
+    </script>
+</body>
+</html>
